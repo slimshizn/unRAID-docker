@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>nmcontroller_web</Name>
+  <Repository>fgrfn/nmcontroller_web</Repository>
+  <Registry>https://hub.docker.com/r/fgrfn/nmcontroller_web/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/fgrfn/nmcontroller_web/</Support>
+  <Project>https://github.com/NMminer1024/NMController_web</Project>
+  <Overview>NMController Web is a browser-based UI for interacting with NMController (backend).&#xD;
+This template deploys the NMController Web frontend in a container and exposes the web UI.&#xD;
+&#xD;
+Dockerized Flask UI for NMMiner devices &#x2013; https://github.com/NMminer1024/NMController_web</Overview>
+  <Category>Crypto: Tools:</Category>
+  <WebUI>http://[IP]:[PORT:7877]</WebUI>
+  <TemplateURL/>
+  <Icon>https://raw.githubusercontent.com/natcoso9955/unRAID-docker/master/icons/NMControler_web.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset>0,16</CPUset>
+  <DateInstalled>1763646177</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="Web UI" Target="7877" Default="7877" Mode="tcp" Description="" Type="Port" Display="always" Required="false" Mask="false">7877</Config>
+  <Config Name="Discovery" Target="12345" Default="" Mode="udp" Description="" Type="Port" Display="advanced" Required="true" Mask="false">12345</Config>
+  <TailscaleStateDir/>
+</Container>
