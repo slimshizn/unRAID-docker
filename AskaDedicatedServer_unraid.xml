@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>AskaDedicatedServer</Name>
+  <Repository>jimbit0/aska-dedicated-server:latest</Repository>
+  <Registry>https://hub.docker.com/r/jimbit0/aska-dedicated-server/</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://hub.docker.com/r/jimbit0/aska-dedicated-server/</Support>
+  <Project>https://store.steampowered.com/app/1898300/ASKA/</Project>
+  <Overview>ASKA is a multiplayer survival game set in a mythical Viking Age world. This container runs a dedicated server for ASKA using Proton-GE for compatibility.&#xD;
+&#xD;
+REQUIREMENTS:&#xD;
+- Authentication token from https://steamcommunity.com/dev/managegameservers for App ID: 1898300&#xD;
+- UDP ports 27015 and 27016 must be forwarded in your router&#xD;
+&#xD;
+SAVE MANAGEMENT:&#xD;
+- Leave ASKA_SAVE_ID empty for new servers (auto-generated after first save)&#xD;
+- For existing saves: place savegame_* folder in /aska-saves volume and delete server.properties.docker.txt&#xD;
+- Save ID format: characters after 'savegame_' (e.g., bbdb7_1801262114211)&#xD;
+&#xD;
+CUSTOM MODE:&#xD;
+- Set ASKA_MODE to 'custom' to enable advanced settings (terrain, seasons, difficulty, etc.)&#xD;
+- Advanced settings must be configured in server.properties.docker.txt file&#xD;
+&#xD;
+For more information, visit the Docker Hub page.</Overview>
+  <Category>GameServers:</Category>
+  <WebUI/>
+  <TemplateURL/>
+  <Icon>https://github.com/natcoso9955/unRAID-docker/raw/refs/heads/master/icons/aska-dedicated-server.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <!-- Required Configuration -->
+  <Config Name="Server Display Name" Target="ASKA_DISPLAY_NAME" Default="My ASKA Server" Mode="" Description="Name displayed in the session/server browser" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Server Internal Name" Target="ASKA_SERVER_NAME" Default="my-aska-server" Mode="" Description="Internal server identifier/hostname (use lowercase, hyphens allowed, no spaces)" Type="Variable" Display="always" Required="true" Mask="false"/>
+  <Config Name="Authentication Token" Target="ASKA_AUTH_TOKEN" Default="" Mode="" Description="Steam GSL authentication token from https://steamcommunity.com/dev/managegameservers (App ID: 1898300). REQUIRED." Type="Variable" Display="always" Required="true" Mask="true"/>
+  <Config Name="Save ID" Target="ASKA_SAVE_ID" Default="" Mode="" Description="Save ID from savegame folder name (e.g., bbdb7_1801262114211). Leave empty for new world or auto-detection. Auto-populated after first save." Type="Variable" Display="always" Required="false" Mask="false"/>
+  <!-- Server Settings -->
+  <Config Name="Server Password" Target="ASKA_PASSWORD" Default="" Mode="" Description="Password required to join the server (leave empty for no password)" Type="Variable" Display="always" Required="false" Mask="true"/>
+  <Config Name="Region" Target="ASKA_REGION" Default="default" Mode="" Description="Server region: default (auto-ping best), asia, japan, europe, south america, south korea, usa east, usa west, australia, canada east, hong kong, india, turkey, united arab emirates, usa south central" Type="Variable" Display="always" Required="false" Mask="false">default</Config>
+  <Config Name="Game Mode" Target="ASKA_MODE" Default="normal" Mode="" Description="normal = standard gameplay | custom = enables terrain, season, difficulty customization (edit server.properties.docker.txt for custom settings)" Type="Variable" Display="always" Required="false" Mask="false">normal</Config>
+  <Config Name="Max Players" Target="ASKA_MAX_PLAYERS" Default="4" Mode="" Description="Maximum number of players allowed on the server (1-4)" Type="Variable" Display="always" Required="false" Mask="false">4</Config>
+  <Config Name="World Seed" Target="ASKA_SEED" Default="" Mode="" Description="World generation seed (leave empty for random)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <Config Name="Keep World Alive" Target="ASKA_KEEP_WORLD_ALIVE" Default="false" Mode="" Description="true = world updates even with no players | false = world loads/unloads with players" Type="Variable" Display="advanced" Required="false" Mask="false">false</Config>
+  <Config Name="Autosave Style" Target="ASKA_AUTOSAVE_STYLE" Default="every morning" Mode="" Description="Options: every morning, disabled, every 5 minutes, every 10 minutes, every 15 minutes, every 20 minutes" Type="Variable" Display="always" Required="false" Mask="false">every morning</Config>
+  <Config Name="Worker Threads" Target="ASKA_WORKER_THREADS" Default="" Mode="" Description="Unity worker threads - leave empty for auto (CPU cores - 1)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <!-- Operational Settings -->
+  <Config Name="Skip Steam Update" Target="ASKA_SKIP_STEAM_UPDATE" Default="0" Mode="" Description="Skip Steam updates on container start: 0 = update (recommended), 1 = skip updates" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Steam Validate" Target="ASKA_STEAM_VALIDATE" Default="0" Mode="" Description="Validate game files on start: 0 = no validation (faster), 1 = validate files (slower, fixes corruption)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Time Zone" Target="TZ" Default="UTC" Mode="" Description="Container timezone (e.g., America/New_York, Europe/London, Asia/Kuala_Lumpur)" Type="Variable" Display="advanced" Required="false" Mask="false">UTC</Config>
+  <!-- Backup Settings -->
+  <Config Name="Enable Save Backup" Target="ASKA_SAVE_BACKUP" Default="0" Mode="" Description="Enable automatic backup on container start: 0 = disabled, 1 = enabled" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="Keep Backups" Target="ASKA_KEEP_SAVES" Default="3" Mode="" Description="Number of backup saves to retain (only applies when ASKA_SAVE_BACKUP=1)" Type="Variable" Display="advanced" Required="false" Mask="false">3</Config>
+  <!-- Crash Detection -->
+  <Config Name="Crash Pattern" Target="ASKA_CRASH_PATTERN" Default="" Mode="" Description="Custom log pattern for crash detection (advanced users only - leave empty for default)" Type="Variable" Display="advanced" Required="false" Mask="false"/>
+  <!-- Storage Paths -->
+  <Config Name="Server Data" Target="/home/steam/aska_server" Default="/mnt/user/appdata/aska/server" Mode="rw" Description="Server installation and data directory (contains server.properties.docker.txt for advanced customization)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/aska/server</Config>
+  <Config Name="Save Files" Target="/aska-saves" Default="/mnt/user/appdata/aska/saves" Mode="rw" Description="Directory for world saves and backups (savegame_* folders go here)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/aska/saves</Config>
+  <!-- Network Ports -->
+  <Config Name="Game Port (UDP)" Target="27015" Default="27015" Mode="udp" Description="Steam game port - clients connect here for gameplay (must be forwarded in router)" Type="Port" Display="always" Required="true" Mask="false">27015</Config>
+  <Config Name="Query Port (UDP)" Target="27016" Default="27016" Mode="udp" Description="Steam query port - manages server browser and client pings (must be forwarded in router)" Type="Port" Display="always" Required="true" Mask="false">27016</Config>
+</Container>
