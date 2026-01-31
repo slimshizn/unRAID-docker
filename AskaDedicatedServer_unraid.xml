@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>AskaDedicatedServer</Name>
-  <Repository>jimbit0/aska-dedicated-server:latest</Repository>
+  <Repository>jimbit0/aska-dedicated-server:experimental</Repository>
   <Registry>https://hub.docker.com/r/jimbit0/aska-dedicated-server/</Registry>
   <Network>bridge</Network>
   <MyIP/>
